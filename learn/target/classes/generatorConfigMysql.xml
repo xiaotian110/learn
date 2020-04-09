@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <classPathEntry
+        location="D:\apache-maven-3.5.0\repository\mysql\mysql-connector-java\5.1.42\mysql-connector-java-5.1.42.jar" />
+    <context id="context1">
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" /><!-- 是否取消注释 -->
+            <property name="suppressDate" value="false" /> <!-- 是否生成注释代时间戳 -->
+        </commentGenerator>
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+            connectionURL="jdbc:Mysql://localhost:3306/study" userId="root" password="mymb52123" />
+        <javaTypeResolver>  
+                <property name="forceBigDecimals" value="false" />  
+     	</javaTypeResolver>     
+        <!-- targetPackage是目标包名,  targetProject是包所在的位置-->
+        <!-- javaModelGenerator生成的是实体类,  sqlMapGenerator生成的是映射文件,  javaClientGenerator生成的是dao -->
+        <javaModelGenerator targetPackage="com.yun.learn.model" targetProject="learn" >
+       
+        </javaModelGenerator>
+        <sqlMapGenerator targetPackage="com.yun.learn.mapper" targetProject="learn" >
+        
+        </sqlMapGenerator>
+        <javaClientGenerator targetPackage="com.yun.learn.mapper" targetProject="learn" type="XMLMAPPER" >
+       
+        </javaClientGenerator>
+            
+        <!-- domainObjectName是表对应的实体类名,  tableName是对应的表名-->
+        <!-- table可以配置多个,enable*几个参数是为了自动生成一些额外的sql操作,可以关闭-->
+       <!--  <table domainObjectName="Picter" tableName="picter"
+            enableCountByExample="false" enableUpdateByExample="false"
+            enableDeleteByExample="false" enableSelectByExample="false"
+            selectByExampleQueryId="false">
+        </table> -->
+     <table domainObjectName="BDataGpsHistory" tableName="b_data_gps_history"
+            enableCountByExample="false" enableUpdateByExample="false"
+            enableDeleteByExample="false" enableSelectByExample="false"
+            selectByExampleQueryId="false">
+        </table> 
+         <!--  <table domainObjectName="Banner" tableName="banner"
+            enableCountByExample="false" enableUpdateByExample="false"
+            enableDeleteByExample="false" enableSelectByExample="false"
+            selectByExampleQueryId="false">
+        </table> -->
+    </context>
+</generatorConfiguration>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yun.learn.mapper.BcarMapper">
+  <resultMap id="BaseResultMap" type="com.yun.learn.model.Bcar">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="device_id" jdbcType="BIGINT" property="deviceId" />
+    <result column="car_type" jdbcType="VARCHAR" property="carType" />
+    <result column="car_num" jdbcType="VARCHAR" property="carNum" />
+    <result column="driver_num" jdbcType="VARCHAR" property="driverNum" />
+    <result column="driver_name" jdbcType="VARCHAR" property="driverName" />
+    <result column="driver_phone" jdbcType="VARCHAR" property="driverPhone" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, device_id, car_type, car_num, driver_num, driver_name, driver_phone
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from b_car
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from b_car
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yun.learn.model.Bcar">
+    insert into b_car (id, device_id, car_type, 
+      car_num, driver_num, driver_name, 
+      driver_phone)
+    values (#{id,jdbcType=INTEGER}, #{deviceId,jdbcType=BIGINT}, #{carType,jdbcType=VARCHAR}, 
+      #{carNum,jdbcType=VARCHAR}, #{driverNum,jdbcType=VARCHAR}, #{driverName,jdbcType=VARCHAR}, 
+      #{driverPhone,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yun.learn.model.Bcar">
+    insert into b_car
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="deviceId != null">
+        device_id,
+      </if>
+      <if test="carType != null">
+        car_type,
+      </if>
+      <if test="carNum != null">
+        car_num,
+      </if>
+      <if test="driverNum != null">
+        driver_num,
+      </if>
+      <if test="driverName != null">
+        driver_name,
+      </if>
+      <if test="driverPhone != null">
+        driver_phone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="deviceId != null">
+        #{deviceId,jdbcType=BIGINT},
+      </if>
+      <if test="carType != null">
+        #{carType,jdbcType=VARCHAR},
+      </if>
+      <if test="carNum != null">
+        #{carNum,jdbcType=VARCHAR},
+      </if>
+      <if test="driverNum != null">
+        #{driverNum,jdbcType=VARCHAR},
+      </if>
+      <if test="driverName != null">
+        #{driverName,jdbcType=VARCHAR},
+      </if>
+      <if test="driverPhone != null">
+        #{driverPhone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yun.learn.model.Bcar">
+    update b_car
+    <set>
+      <if test="deviceId != null">
+        device_id = #{deviceId,jdbcType=BIGINT},
+      </if>
+      <if test="carType != null">
+        car_type = #{carType,jdbcType=VARCHAR},
+      </if>
+      <if test="carNum != null">
+        car_num = #{carNum,jdbcType=VARCHAR},
+      </if>
+      <if test="driverNum != null">
+        driver_num = #{driverNum,jdbcType=VARCHAR},
+      </if>
+      <if test="driverName != null">
+        driver_name = #{driverName,jdbcType=VARCHAR},
+      </if>
+      <if test="driverPhone != null">
+        driver_phone = #{driverPhone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yun.learn.model.Bcar">
+    update b_car
+    set device_id = #{deviceId,jdbcType=BIGINT},
+      car_type = #{carType,jdbcType=VARCHAR},
+      car_num = #{carNum,jdbcType=VARCHAR},
+      driver_num = #{driverNum,jdbcType=VARCHAR},
+      driver_name = #{driverName,jdbcType=VARCHAR},
+      driver_phone = #{driverPhone,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="queryAll"  resultMap="BaseResultMap" parameterType="com.yun.learn.model.Bcar">
+     SELECT device_id,car_type,car_num,driver_num,driver_name,driver_phone  FROM b_car
+  <where>
+  	<if test="carType!=null and carType!= ''">
+  		car_type LIKE CONCAT('%', #{carType,jdbcType=VARCHAR}, '%')
+  	</if>
+  	<if test="driverName!=null and driverName!=''">
+  		driver_name LIKE CONCAT('%', #{driverName,jdbcType=VARCHAR}, '%')
+  	</if> 
+  </where>
+    LIMIT  #{page.startRecord},#{page.pageSize}
+  </select>
+  
+  <select id="count" resultType="java.lang.Integer">
+  	SELECT COUNT(*) from b_car
+  </select>
+  
+   <select id="excelAll"  resultMap="BaseResultMap">
+     SELECT device_id,car_type,car_num,driver_num,driver_name,driver_phone  FROM b_car
+  
+  </select>
+  
+</mapper>
