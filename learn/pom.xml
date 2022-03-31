@@ -13,7 +13,7 @@
 		<!-- 为pom定义一些常量，在pom中的其它地方可以直接引用 使用方式 如下 ：${file.encoding} -->
 		<file.encoding>UTF-8</file.encoding>
 		<ueditor.version>1.1.2</ueditor.version>
-		<spring-version>4.3.10.RELEASE</spring-version>
+		<spring-version>5.3.18</spring-version>
 	</properties>
   <dependencies>
     <dependency>
